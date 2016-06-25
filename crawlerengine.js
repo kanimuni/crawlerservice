@@ -7,7 +7,7 @@ var blobArray = [];
 var crawlerEngine = function(config, cb) {
 
   request(config.newsurl, function(error, response, body) {
-    var blobObj = config.resultObj;
+    // var blobObj = config.resultObj;
     if(error) {
       console.log("Error: " + error);
     }
@@ -16,6 +16,7 @@ var crawlerEngine = function(config, cb) {
     var $ = cheerio.load(body);
 
     $(config.primarySelector).each(function(index, value) {
+      var blobObj = Object.assign({}, config.resultObj);
       var title = config.title($(value));
       var link = config.link($(value));
       var image = config.image($(value));
@@ -28,14 +29,12 @@ var crawlerEngine = function(config, cb) {
       image ? blobObj.image_url = config.imagelinkprefix + image : blobObj.image_url = 'null';
       blobObj.article_date = date;
       summary ? blobObj.article_summary = summary : blobObj.article_summary = 'null';
+      
       blobArray.push(blobObj);
-      console.log(blobObj);
-      console.log(blobArray);
     });
-    var jasonBlob = JSON.stringify(blobArray, null, 4);
-    cb(null, jasonBlob);
+    // var jasonBlob = JSON.stringify(blobArray, null, 4);
+    cb(null, blobArray);
   });
-  
 };
 
 module.exports = crawlerEngine;
