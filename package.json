@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "A simple webcrawler written in JavaScript",
   "main": "crawler.js",
-  "author": "Stephen",
+  "author": "Kani Muni",
   "license": "ISC",
   "dependencies": {
     "async": "^2.0.0-rc.6",
