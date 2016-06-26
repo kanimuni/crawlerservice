@@ -6,7 +6,7 @@ const mongoconfig = require('./env/mongoconfig');
 
 
 var findNews = function(db, callback) {
-   var news =db.collection('news').find({ 'pub_name': 'telegraph', 'title': 'Creating a healthier world'});
+   var news =db.collection('news').find({ 'pub_name':'nytimes', 'image_url': 'null'});
    news.each(function(err, doc) {
       assert.equal(err, null);
       if (doc != null) {
