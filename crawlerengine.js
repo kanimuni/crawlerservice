@@ -26,10 +26,11 @@ var crawlerEngine = function(config, cb) {
 
       blobObj.title = title;
       blobObj.article_url = config.articlelinkprefix + link;
-      image ? blobObj.image_url = config.imagelinkprefix + image : blobObj.image_url = 'null';
+      blobObj.image_url = image ? config.imagelinkprefix + image : 'null';
       blobObj.article_date = date;
-      summary ? blobObj.article_summary = summary : blobObj.article_summary = 'null';
-      
+      blobObj.article_summary = summary ? summary : 'null'; // 'proper' way to use turnaries :)
+      // these can be confuddling so ask me if you need clarification!
+
       blobArray.push(blobObj);
     });
     // var jasonBlob = JSON.stringify(blobArray, null, 4);
@@ -38,3 +39,5 @@ var crawlerEngine = function(config, cb) {
 };
 
 module.exports = crawlerEngine;
+
+//overall big thumbs up! I like this file!

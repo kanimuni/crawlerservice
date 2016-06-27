@@ -1,63 +1,22 @@
 const crawlerEngine = require('./crawlerengine.js');
-const telegraphConfig = require('./crawlconfig/telegraphconfig.js');
-const bbcConfig = require('./crawlconfig/bbcconfig.js');
-const nprConfig = require('./crawlconfig/nprconfig.js');
-const nytimesConfig = require('./crawlconfig/nytimesconfig.js');
-const washingtonpostConfig = require('./crawlconfig/washingtonpostconfig.js');
 const saveToMongo = require('./mongoman.js');
 
+//Could be very nicely written as follows:
+const crawlConfigs = require('./crawlconfig.index.js'); //object full of crawlerMethods
 
-setInterval(function() {
-  crawlerEngine(telegraphConfig, function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-    saveToMongo(data);
-    }
-  });
-}, 3600000);
+for(var siteName in crawlConfigs){
 
+  setInterval(function() {
+    crawlerEngine(crawlConfigs[siteName], function(err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        saveToMongo(data); //ideally, write this with a callback, and then log
+                           //success, time, siteName, and anything else useful.
+                           //Of course you know I'd recommend Promises, but I
+                           //wont pester you with that here :)
+      }
+    });
+  }, 3600000); // 1 hour (polite to say, so save you the maths in your head)
 
-setInterval(function() {
-  crawlerEngine(bbcConfig, function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(data);
-    saveToMongo(data);
-    }
-  });
-}, 3600000);
-
-setInterval(function() {
-  crawlerEngine(nprConfig, function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(data);
-    saveToMongo(data);
-    }
-  });
-}, 3600000);
-
-setInterval(function() {
-  crawlerEngine(nytimesConfig, function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(data);
-    saveToMongo(data);
-    }
-  });
-}, 3600000);
-
-setInterval(function() {
-  crawlerEngine(washingtonpostConfig, function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(data);
-    saveToMongo(data);
-    }
-  });
-}, 3600000);
+}

@@ -1,6 +1,6 @@
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
-const mongoconfig = require('./env/mongoconfig'); 
+const mongoconfig = require('./env/mongoconfig');
 
 const saveToMongo = function(data) {
   MongoClient.connect(mongoconfig.url, function (err, db) {
@@ -27,3 +27,7 @@ const saveToMongo = function(data) {
 };
 
 module.exports = saveToMongo;
+
+//generally, with an Async task like this, it's a good idea to
+//accept a callback, and be able to do something when finished,
+//even if it's just console.logging time and success etc. :)
