@@ -7,7 +7,6 @@ var blobArray = [];
 var crawlerEngine = function(config, cb) {
 
   request(config.newsurl, function(error, response, body) {
-    // var blobObj = config.resultObj;
     if(error) {
       console.log("Error: " + error);
     }
@@ -22,22 +21,17 @@ var crawlerEngine = function(config, cb) {
       var image = config.image($(value));
       var summary = config.summary($(value));
       var date = moment().format();
-      // console.log($(config.primarySelector)[0]);
 
       blobObj.title = title;
       blobObj.article_url = config.articlelinkprefix + link;
       blobObj.image_url = image ? config.imagelinkprefix + image : 'null';
       blobObj.article_date = date;
-      blobObj.article_summary = summary ? summary : 'null'; // 'proper' way to use turnaries :)
-      // these can be confuddling so ask me if you need clarification!
+      blobObj.article_summary = summary ? summary : 'null'; 
 
       blobArray.push(blobObj);
     });
-    // var jasonBlob = JSON.stringify(blobArray, null, 4);
     cb(null, blobArray);
   });
 };
 
 module.exports = crawlerEngine;
-
-//overall big thumbs up! I like this file!

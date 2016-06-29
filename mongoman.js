@@ -1,33 +1,20 @@
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const mongoconfig = require('./env/mongoconfig');
+const mongo = require('mongodb-bluebird');
 
 const saveToMongo = function(data) {
-  MongoClient.connect(mongoconfig.url, function (err, db) {
-    if (err) {
-      console.log('Unable to connect to the mongoDB server. Error:', err);
-    } else {
-      console.log('Connection established to tandem-mongo');
-
-      // Get the documents collection
-      var collection = db.collection('news');
-
-      collection.insert(data, function (err, result) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('Inserted documents into the "news" collection. The documents inserted with "_id" are:', result.length, result);
-        }
-        //Close connection
-        db.close();
-      });
-    }
+  mongo.connect(mongoconfig.url).then(function(db) {
+    //get the user collection
+    var newsdb = db.collection('news');
+    return newsdb.find()
+    .then(function(news) {
+      newsdb.insert(news);
+      console.log(news);
+    }).catch(function(err) {
+        console.error("something went wrong");
+    });
   });
-
-};
+}
 
 module.exports = saveToMongo;
-
-//generally, with an Async task like this, it's a good idea to
-//accept a callback, and be able to do something when finished,
-//even if it's just console.logging time and success etc. :)
