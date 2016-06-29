@@ -7,7 +7,7 @@ const saveToMongo = function(data) {
   mongo.connect(mongoconfig.url).then(function(db) {
     db.collection('news').insert(data)
     .catch(function(err) {
-      console.error("something went wrong");
+      console.error("OOPS! something went wrong");
     });
   });
 }
