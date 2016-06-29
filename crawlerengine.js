@@ -7,7 +7,6 @@ var blobArray = [];
 var crawlerEngine = function(config, cb) {
 
   request(config.newsurl, function(error, response, body) {
-    // var blobObj = config.resultObj;
     if(error) {
       console.log("Error: " + error);
     }
@@ -22,17 +21,15 @@ var crawlerEngine = function(config, cb) {
       var image = config.image($(value));
       var summary = config.summary($(value));
       var date = moment().format();
-      // console.log($(config.primarySelector)[0]);
 
       blobObj.title = title;
       blobObj.article_url = config.articlelinkprefix + link;
-      image ? blobObj.image_url = config.imagelinkprefix + image : blobObj.image_url = 'null';
+      blobObj.image_url = image ? config.imagelinkprefix + image : 'null';
       blobObj.article_date = date;
-      summary ? blobObj.article_summary = summary : blobObj.article_summary = 'null';
-      
+      blobObj.article_summary = summary ? summary : 'null'; 
+
       blobArray.push(blobObj);
     });
-    // var jasonBlob = JSON.stringify(blobArray, null, 4);
     cb(null, blobArray);
   });
 };
