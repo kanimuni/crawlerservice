@@ -5,16 +5,12 @@ const mongo = require('mongodb-bluebird');
 
 const saveToMongo = function(data) {
   mongo.connect(mongoconfig.url).then(function(db) {
-    //get the user collection
-    var newsdb = db.collection('news');
-    return newsdb.find()
-    .then(function(news) {
-      newsdb.insert(news);
-      console.log(news);
-    }).catch(function(err) {
-        console.error("something went wrong");
+    db.collection('news').insert(data)
+    .catch(function(err) {
+      console.error("OOPS! something went wrong");
     });
   });
 }
 
 module.exports = saveToMongo;
+
