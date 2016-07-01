@@ -9,4 +9,6 @@ fs.readdirSync(__dirname).forEach(function(fileName) {
 
 });
 
+// console.log(crawlerConfigs);
+
 module.exports = crawlerConfigs;
