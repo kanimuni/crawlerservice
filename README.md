@@ -11,6 +11,10 @@ The 5 news sites it crawls are npr, nytimes, washingtonpost, bbc and telegraph.
 
 ![System Diagram](https://github.com/kanimuni/crawlerservice/blob/master/pics/diagram1.jpg "High Level Diagram")
 
+![System Diagram](https://github.com/kanimuni/crawlerservice/blob/master/pics/diagram2.jpg "High Level Diagram")
+
+
+
 # The setup
 Simply fork and clone this repo and run `npm install`
 You will need to create a /env directory on root and create file named mongoconfig.js
