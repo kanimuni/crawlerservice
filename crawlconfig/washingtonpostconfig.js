@@ -18,5 +18,5 @@ module.exports = {
   articlelinkprefix: '',
   imagelinkprefix: '',
   primarySelector: 'div.border-bottom-hairline.border-bottom-100-pct',
-  resultObj: {pub_name:'washingtonpost', pub_url:'www.nytimes.com'}
+  resultObj: {pub_name:'washingtonpost', pub_url:'www.washingtonpost.com'}
 }

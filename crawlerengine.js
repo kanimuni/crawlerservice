@@ -31,6 +31,7 @@ var crawlerEngine = function(config, cb) {
       blobArray.push(blobObj);
     });
     cb(null, blobArray);
+    blobArray = [];
   });
 };
 

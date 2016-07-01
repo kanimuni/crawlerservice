@@ -1,16 +1,99 @@
-const crawlerEngine = require('./crawlerengine.js');
-const saveToMongo = require('./mongoman.js');
-const crawlConfigs = require('./crawlconfig/index.js'); //object full of crawlerMethods
-for(var siteName in crawlConfigs){
+// const crawlerEngine = require('./crawlerengine.js');
+// const saveToMongo = require('./mongoman.js');
+// const crawlConfigs = require('./crawlconfig/index.js'); //object full of crawlerMethods
+const dropmongo = require('./mongonewsdrop.js');
+const populateMongo = require('./populatemongonew.js');
+const mongopopulate = require('./instantpopulate.js');
+const mysqlGet = require('./mysqlread.js');
+const mongoNewsRead = require('./readmongonews.js')
+const async = require('async');
+const _ = require('lodash');
+var mData;
+var sData;
 
-  setInterval(function() {
-    crawlerEngine(crawlConfigs[siteName], function(err, data) {
-      if (err) {
+var removeDups = function(arr1, arr2) {
+  _.forEach(arr2, function(value, key) {
+    if(_.findIndex( arr1, {'article_url': value.article_url}) !== -1) {
+      arr1.splice( _.findIndex( arr1, {'article_url': value.article_url} ), 1 )
+    }
+  });
+};
+
+
+async.series([
+  // drop mongo news
+  function(callback) {
+    console.log('=============================================================');
+    console.log('ONE: Drop mongo like a hot potato ...');
+    dropmongo(function(err, result) {
+      if(err) {
         console.log(err);
       } else {
-        console.log('set intervl is doing its thing');
-        saveToMongo(data);
+        callback(null, 'mongo dropped');
       }
     });
-  }, 3600000); // 1 hour
-}
+  },
+  // read mysql
+  function(callback) {
+    console.log('=============================================================');
+    console.log('TWO: Reading mysql database ....')
+    mysqlGet(function(err, mysqldata) {
+      if(err) {
+        console.log(err)
+      } else {
+        sData = mysqldata;
+        console.log('sData length ..... ', sData.length)
+        console.log('sData ..... ', sData)
+        callback(null, 'got from mysql');
+      }
+    });
+  },
+  // crawl, scrape and populate mongo
+  function(callback) {
+    console.log('=============================================================');
+    console.log('THREE: Crawling, scraping and populating mongo ...')
+    mongopopulate(function(err, result) {
+      callback(null, 'cralwers done')
+    });
+  },
+  // read mongo news
+  function(callback){
+    console.log('=============================================================');
+    console.log('FOUR: Reading mongodb ....')
+    mongoNewsRead(function(err, mongodata){
+      if(err) {
+        console.log(err);
+      } else {
+        mData = mongodata;
+        console.log('mData length ..... ', mData.length);
+        console.log('mData ..... ', mData);        
+        callback(null, 'mongo daata read');
+      }
+    });
+  },
+  function(callback) {
+    console.log('=============================================================');
+    console.log('FIVE: Diffing the data between mongo and mysql ...');
+    removeDups(mData, sData);
+    console.log('mData length after diff ..... ', mData.length);
+    console.log('mData after diff ..... ', mData);  
+    callback(null, 'mDataDiffed');
+  },
+  function(callback) {
+    console.log('=============================================================');
+    console.log('SIX: Populate mongo new ...');
+    populateMongo('newnews', mData, function(err, result) {
+      callback(null, 'newnews updated ...')
+    });
+  }
+],
+// optional callback
+  function(err, results) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(results);
+      console.log('END: The Symphony is now complete!!');
+    }
+  }
+);
