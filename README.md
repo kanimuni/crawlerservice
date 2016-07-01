@@ -3,7 +3,7 @@ This repo contains all the workings of the crawler service for the product tande
 When the crawlconductor.js file is run it kicks off 5 crawlers and inserts its findings into the mongodatabase for other services to use.
 The 5 news sites it crawls are npr, nytimes, washingtonpost, bbc and telegraph
 
-![Alt text](https://github.com/kanimuni/crawlerservice/blob/master/pics/diagram1.jpg "Optional title")
+![System Diagram](https://github.com/kanimuni/crawlerservice/blob/master/pics/diagram1.jpg "High Level Diagram")
 
 # The setup
 Simply fork and clone this repo and run `npm install`
