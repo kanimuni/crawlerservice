@@ -1,7 +1,7 @@
 # crawler-service
 This repo contains all the workings of the crawler service for the product tandem.
 The crawlconductor.js file is what sets things in motion.
-When run it does the following ...
+When run it does the following ...  
 1. drop all articles previously stored in the collection "news" (mongodb).  
 2. read the article currently in the database tandem (MySQL)  
 3. kick off the crawelers and save the scapted articles into the "news" collection (mongodb).  
