@@ -2,12 +2,12 @@
 This repo contains all the workings of the crawler service for the product tandem.
 The crawlconductor.js file is what sets things in motion.
 When run it does the following ...
-1. drop all articles previously stored in the collection "news" (mongodb).
-2. read the article currently in the database tandem (MySQL)
-3. kick off the crawelers and save the scapted articles into the "news" collection (mongodb).
-4. Check if there are any new articles in the just crawled and saved data that does not exist in our tandem database.
-5. If yes present only those new articles in the collection "newnews" (mongodb)
-The 5 news sites it crawls are npr, nytimes, washingtonpost, bbc and telegraph
+1. drop all articles previously stored in the collection "news" (mongodb).  
+2. read the article currently in the database tandem (MySQL)  
+3. kick off the crawelers and save the scapted articles into the "news" collection (mongodb).  
+4. Check if there are any new articles in the just crawled and saved data that does not exist in our tandem database.  
+5. If yes present only those new articles in the collection "newnews" (mongodb).  
+The 5 news sites it crawls are npr, nytimes, washingtonpost, bbc and telegraph.  
 
 ![System Diagram](https://github.com/kanimuni/crawlerservice/blob/master/pics/diagram1.jpg "High Level Diagram")
 
