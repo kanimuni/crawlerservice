@@ -5,20 +5,18 @@
   "main": "crawler.js",
   "author": "Kani Muni",
   "license": "ISC",
-  
-
   "scripts": {
     "test": "npm run test-mongo && npm run test-orchestra",
     "test-mongo": "mocha --bail --reporter spec test/mongo/",
     "test-orchestra": "mocha --bail --reporter spec test/orchestra/"
   },
-
   "dependencies": {
     "async": "^2.0.0-rc.6",
     "chai": "^3.5.0",
     "cheerio": "^0.19.0",
     "fs": "0.0.2",
     "lodash": "^4.13.1",
+    "mocha": "^2.5.3",
     "moment": "^2.13.0",
     "mongo-bluebird": "0.0.6",
     "mongodb": "^2.1.18",
