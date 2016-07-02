@@ -1,5 +1,5 @@
 var assert = require('chai').assert;
-var mongoconfig = require('../env/mongoconfig');
+var mongoconfig = require('../../env/mongoconfig');
 var mongo = require('mongodb-bluebird');
 
 describe('database', function() {
