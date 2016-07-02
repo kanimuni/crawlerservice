@@ -23,7 +23,10 @@ var crawlerEngine = function(config, cb) {
       var date = moment().format();
 
       blobObj.title = title;
-      blobObj.article_url = config.articlelinkprefix + link;
+      // console.log(typeof(link) + ' - ' + link);
+      if(typeof(link) === 'string') {
+        blobObj.article_url = (link.substring(0, 4) === 'http') ? link : config.articlelinkprefix + link;
+      }
       blobObj.image_url = image ? config.imagelinkprefix + image : 'null';
       blobObj.article_date = date;
       blobObj.article_summary = summary ? summary : 'null'; 
