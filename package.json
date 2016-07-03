@@ -6,9 +6,10 @@
   "author": "Kani Muni",
   "license": "ISC",
   "scripts": {
-    "test": "npm run test-mongo && npm run test-orchestra",
+    "test": "npm run test-mongo && npm run test-crawler && npm run test-mysql",
     "test-mongo": "mocha --bail --reporter spec test/mongo/",
-    "test-orchestra": "mocha --bail --reporter spec test/orchestra/"
+    "test-mysql": "mocha --bail --reporter spec test/mysql/",
+    "test-crawler": "mocha --bail --reporter spec test/crawler/"
   },
   "dependencies": {
     "async": "^2.0.0-rc.6",
