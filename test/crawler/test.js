@@ -1,7 +1,6 @@
 const assert = require('chai').assert;
 const crawlerEngine = require('../../crawlerengine.js');
 const crawlConfigs = require('../../crawlconfig/index.js');
-// const _ = require('lodash');
 
 describe('Crawlers', function() {
   
