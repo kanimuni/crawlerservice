@@ -11,10 +11,7 @@ describe('Crawlers', function() {
         if (err) { 
           console.log('An error occured in crawlerEngine', err); 
         } else {
-          var non_duplicated_url = _.uniqBy(crawlData, 'article_url');
-          var non_duplicated_title = _.uniqBy(non_duplicated_url, 'title');
-          // console.log(non_duplicated_title[0].pub_name);
-          assert('bbc' === non_duplicated_title[0].pub_name);
+          assert('bbc' === crwalData[0].pub_name);
         }
       });
     });
@@ -26,10 +23,7 @@ describe('Crawlers', function() {
         if (err) { 
           console.log('An error occured in crawlerEngine', err); 
         } else {
-          var non_duplicated_url = _.uniqBy(crawlData, 'article_url');
-          var non_duplicated_title = _.uniqBy(non_duplicated_url, 'title');
-          // console.log(non_duplicated_title[0].pub_name);
-          assert('npr' === non_duplicated_title[0].pub_name);
+          assert('npr' === crwalData[0].pub_name);
         }
       });
     });
@@ -41,10 +35,7 @@ describe('Crawlers', function() {
         if (err) { 
           console.log('An error occured in crawlerEngine', err); 
         } else {
-          var non_duplicated_url = _.uniqBy(crawlData, 'article_url');
-          var non_duplicated_title = _.uniqBy(non_duplicated_url, 'title');
-          // console.log(non_duplicated_title[0].pub_name);
-          assert('nytimes' === non_duplicated_title[0].pub_name);
+          assert('nytimes' === crwalData[0].pub_name);
         }
       });
     });
@@ -56,10 +47,7 @@ describe('Crawlers', function() {
         if (err) { 
           console.log('An error occured in crawlerEngine', err); 
         } else {
-          var non_duplicated_url = _.uniqBy(crawlData, 'article_url');
-          var non_duplicated_title = _.uniqBy(non_duplicated_url, 'title');
-          // console.log(non_duplicated_title[0].pub_name);
-          assert('telegraph' === non_duplicated_title[0].pub_name);
+          assert('telegraph' === crwalData[0].pub_name);
         }
       });
     });
@@ -71,10 +59,7 @@ describe('Crawlers', function() {
         if (err) { 
           console.log('An error occured in crawlerEngine', err); 
         } else {
-          var non_duplicated_url = _.uniqBy(crawlData, 'article_url');
-          var non_duplicated_title = _.uniqBy(non_duplicated_url, 'title');
-          // console.log(non_duplicated_title[0].pub_name);
-          assert('washingtonpost' === non_duplicated_title[0].pub_name);
+          assert('washingtonpost' === crwalData[0].pub_name);
         }
       });
     });
