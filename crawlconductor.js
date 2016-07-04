@@ -1,7 +1,8 @@
 // const crawlerEngine = require('./crawlerengine.js');
 // const saveToMongo = require('./mongoman.js');
 // const crawlConfigs = require('./crawlconfig/index.js'); //object full of crawlerMethods
-const dropmongo = require('./mongonewsdrop.js');
+const dropmongonews = require('./mongonewsdrop.js');
+const dropmongonewnews = require('./mongonewnewsdrop.js');
 const populateMongo = require('./populatemongonew.js');
 const mongopopulate = require('./instantpopulate.js');
 const mysqlGet = require('./mysqlread.js');
@@ -24,12 +25,12 @@ async.series([
   // drop mongo news
   function(callback) {
     console.log('=============================================================');
-    console.log('ONE: Drop mongo like a hot potato ...');
-    dropmongo(function(err, result) {
+    console.log('ONE: Drop mongo collection NEWS like a hot potato ...');
+    dropmongonews(function(err, result) {
       if(err) {
         console.log(err);
       } else {
-        callback(null, 'mongo dropped');
+        callback(null, 'mongo news dropped');
       }
     });
   },
@@ -79,9 +80,22 @@ async.series([
     console.log('mData after diff ..... ', mData);  
     callback(null, 'mDataDiffed');
   },
+
   function(callback) {
     console.log('=============================================================');
-    console.log('SIX: Populate mongo new ...');
+    console.log('SIX: Drop mongo collection NEW-NEWS like a hot potato ...');
+    dropmongonewnews(function(err, result) {
+      if(err) {
+        console.log(err);
+      } else {
+        callback(null, 'mongo new news dropped');
+      }
+    });
+  },
+
+  function(callback) {
+    console.log('=============================================================');
+    console.log('SEVEN: Populate mongo new ...');
     populateMongo('newnews', mData, function(err, result) {
       callback(null, 'newnews updated ...')
     });

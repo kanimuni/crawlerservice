@@ -1,6 +1,6 @@
 var assert = require('chai').assert;
 var mysql = require('promise-mysql');
-const mysqlconfig = require('../../env/mysqlconfig');
+var mysqlconfig = require('../../env/mysqlconfig');
 // var writeFile = require('write');
 
 describe('MySQL', function() {
