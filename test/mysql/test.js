@@ -1,6 +1,6 @@
 var assert = require('chai').assert;
-var mysql = require('promise-mysql');
 var mysqlconfig = require('../../env/mysqlconfig.js');
+var mysql = require('promise-mysql');
 
 describe('MySQL', function() {
   describe('#connect()', function () {
