@@ -1,14 +1,14 @@
 {
-  "name": "simple-webcrawler-javascript",
+  "name": "tandem-webcrawler-service",
   "version": "0.0.0",
-  "description": "A simple webcrawler written in JavaScript",
-  "main": "crawler.js",
+  "description": "This is the crawler service build specificlly for tandem",
+  "main": "crawlconductor.js",
   "author": "Kani Muni",
   "license": "ISC",
   "scripts": {
-    "test": "npm run test-mongo && npm run test-crawler && npm run test-mysql",
-    "test-mongo": "mocha test/mongo/",
+    "test": "npm run test-mongo && npm run test-crawler",
     "test-mysql": "mocha test/mysql/",
+    "test-mongo": "mocha test/mongo/",
     "test-crawler": "mocha test/crawler/"
   },
   "dependencies": {
