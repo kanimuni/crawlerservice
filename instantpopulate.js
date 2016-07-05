@@ -1,8 +1,8 @@
-const crawlerEngine = require('./crawlerengine.js');
-const saveToMongo = require('./mongoman.js');
+var crawlerEngine = require('./crawlerengine.js');
+var saveToMongo = require('./mongoman.js');
 var async = require('async');
-const crawlConfigs = require('./crawlconfig/index.js');
-const _ = require('lodash');
+var crawlConfigs = require('./crawlconfig/index.js');
+var _ = require('lodash');
 
 var mongopopulate = function(cb) {
   async.each(crawlConfigs, function(keys) {
