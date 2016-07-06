@@ -30,7 +30,7 @@ async.series([
       if(err) {
         console.log(err);
       } else {
-        callback(null, 'mongo news dropped');
+        callback(null, 'mongo news dropped!');
       }
     });
   },
@@ -45,7 +45,7 @@ async.series([
         sData = mysqldata;
         console.log('sData length ..... ', sData.length)
         console.log('sData ..... ', sData)
-        callback(null, 'got from mysql');
+        callback(null, 'got from mysql: ' + sData.length);
       }
     });
   },
@@ -54,7 +54,7 @@ async.series([
     console.log('=============================================================');
     console.log('THREE: Crawling, scraping and populating mongo ...')
     mongopopulate(function(err, result) {
-      callback(null, 'cralwers done')
+      callback(null, 'cralwers done and mongo updated!')
     });
   },
   // read mongo news
@@ -68,7 +68,7 @@ async.series([
         mData = mongodata;
         console.log('mData length ..... ', mData.length);
         console.log('mData ..... ', mData);        
-        callback(null, 'mongo daata read');
+        callback(null, 'got from mongo: ' + mData.length);
       }
     });
   },
@@ -78,7 +78,7 @@ async.series([
     removeDups(mData, sData);
     console.log('mData length after diff ..... ', mData.length);
     console.log('mData after diff ..... ', mData);  
-    callback(null, 'mDataDiffed');
+    callback(null, 'diff mongo and mysql to new articles :' + mData.length);
   },
 
   function(callback) {
@@ -97,7 +97,7 @@ async.series([
     console.log('=============================================================');
     console.log('SEVEN: Populate mongo new ...');
     populateMongo('newnews', mData, function(err, result) {
-      callback(null, 'newnews updated ...')
+      callback(null, 'newnews updated with : ' + mData.length);
     });
   }
 ],
