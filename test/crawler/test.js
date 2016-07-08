@@ -6,11 +6,12 @@ describe('Crawlers', function() {
   
   describe('#crawlbbc()', function () {
     it('should return a PASS after succesfully crawling BBC', function () {
-      crawlerEngine(crawlConfigs.bbcconfig, function(err, crawlData) {
+      return crawlerEngine(crawlConfigs.bbcconfig, function(err, crawlData) {
+        console.log("this ran")
         if (err) { 
           console.log('An error occured in crawlerEngine', err); 
         } else {
-          assert('bbc' === crwalData[0].pub_name);
+         return assert('bbc' === crawlData[0].pub_name);
         }
       });
     });
